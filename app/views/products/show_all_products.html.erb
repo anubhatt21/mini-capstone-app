@@ -1,8 +1,8 @@
 <h1> Product Information </h1>
-<% @show_products.each do |product| %>
+<% @products.each do |product| %>
   <p>
   <li> Name: <%= product.name %> <br> 
-  Price: <%=product.price %> <br> 
+  Price: <%= product.price %> <br> 
   Image: <%= product.image %> <br> 
   Description: <%= product.description %> </li>
   </p>

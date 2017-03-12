@@ -1,0 +1,15 @@
+<h1> Product Information </h1>
+<%= @products %>
+<p>
+  <li> 
+  Name: <%= @product.name %> <br> 
+  Price: <%= @product.price %> <br> 
+  Image: <%= @product.image %> <br> 
+  Description: <%= @product.description %> </li>
+  </p>
+
+  <%= form_tag "/products/#{@product.id}" , method: :delete do %>
+<input type="Submit" value="Destroy product">
+<% end %>
+  
+
