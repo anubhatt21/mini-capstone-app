@@ -1,8 +1,9 @@
 <h1> Product Information </h1>
 <% @product %>
 <p>
-  <li> 
-  Name: <%= @product.name %> <br> 
+  
+  Name: <%= @product.name %>  
+  <h5> Made By: <%= @product.supplier.name %> </h5><br>
   Price: <%= number_to_currency(@product.price) %> <br>
   Image: <%= @product.image %> <br> 
   Description: <%= @product.description %> <br>
@@ -12,7 +13,7 @@
    <br>
   Estimated tax: <%= number_to_currency(@product.tax) %> <br>
   Total: <%= number_to_currency(@product.total) %> 
-  </li>
+  
   </p>
 
   <%= form_tag "/products/#{@product.id}" , method: :delete do %>
