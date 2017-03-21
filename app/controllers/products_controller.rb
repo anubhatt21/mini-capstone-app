@@ -1,8 +1,14 @@
 class ProductsController < ApplicationController
   
   def index
-    @products = Product.all
-    render "show_all_products.html.erb"
+    if params[:discounted] == "true"
+      @products = Product.where("price < ?", 10)
+    else
+      sort_attribute = params[:sort_by] || "name"
+      sort_attribute_order = params[:sort_order] || "asc"
+      @products = Product.all.order(sort_attribute => sort_attribute_order)
+    end
+    render "index.html.erb"
   end
 
   def new
@@ -39,31 +45,33 @@ class ProductsController < ApplicationController
 
 
   def show
-    product_id = params[:id]
-    @product = Product.find_by(id: product_id)
-    # @product = Product.name
+    if params[:id] == "random"
+      @product = Product.all.sample
+    else
+      product_id = params[:id]
+      @product = Product.find_by(id: product_id)
+    end
     render "show_products.html.erb"
   end
+
 
   def all_products
     @show_products = Product.all
     render "show_all_products.html.erb"
   end
   
-  def product_1
-    @product1_image = Product.all 
-    render "product1_image_link.html.erb"
-  end
+  # def product_1
+  #   @product1_image = Product.all 
+  #   render "product1_image_link.html.erb"
+  # end
 
   def destroy
     product_id = params[:id]
     @product = Product.find_by(id: product_id)
-    # @product.name = params[:form_name]
-    # @product.price = params[:form_price]
-    # @product.image = params[:form_image]
-    # @product.description = params[:form_description]
     @product.destroy
     render "destroy.html.erb"
   end
+
+  
 
 end
