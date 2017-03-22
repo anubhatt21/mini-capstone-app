@@ -5,7 +5,11 @@
   Name: <%= @product.name %>  
   <h5> Made By: <%= @product.supplier.name %> </h5><br>
   Price: <%= number_to_currency(@product.price) %> <br>
-  Image: <%= @product.image %> <br> 
+  Images: 
+  <% @product.images.each do |image| %> 
+    <img src="<%= image.url %>" alt="product.name">
+  <% end %>
+  <br> 
   Description: <%= @product.description %> <br>
   <% if @product.discounted? %>
     "Discounted!"
