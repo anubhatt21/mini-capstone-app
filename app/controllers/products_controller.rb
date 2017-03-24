@@ -1,6 +1,12 @@
 class ProductsController < ApplicationController
   
   def index
+    if session[:count] == nil
+      session[:count] = 0
+    end
+    session[:count] += 1
+    @page_count = session[:count]
+    
     if params[:discounted] == "true"
       @products = Product.where("price < ?", 10)
     else
@@ -16,13 +22,18 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product = Product.new(
+    @product = Product.new(
       name: params[:form_name],
       price: params[:form_price],
-      image: params[:form_image],
-      description: params[:form_description]
+      description: params[:form_description],
+      supplier_id: 1
     )
-    product.save
+    @product.save
+    image = Image.new(
+      url: params[:image],
+      product_id: @product.id
+      )
+    image.save
     render "create.html.erb"
   end
 

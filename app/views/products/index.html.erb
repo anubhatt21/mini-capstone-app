@@ -1,13 +1,19 @@
 <h1> Product Information </h1>
 <div class="row">
+<h2> You have visited this page <%= @page_count %> times! </h2><br>
+<% if current_user %>
+<h3> Hi <%= current_user.name %>!</h3>
+<% end %>
 <% @products.each do |product| %>
 <div class="col-md-4">
-
-  <p>
+ <p>
   <div class="well">
   <li> <a href="/products/<%= product.id %>">Name: <%= product.name %></a> <br> 
   Price: <%= product.price %> <br> 
-  <img class="product-image" src="<%= product.images %>" alt="<%= product.name %>">Image: <%= product.images[0].url %> <br> 
+  <% if product.images.first %>
+  <a href="/products/<%= product.id %>">Image:<img class="product-image" src="<%= product.images.first.url %>" alt="<%= product.name %>"></a>
+  <%end%>
+  <br> 
   Description: <%= product.description %> </li>
   </div>
   </p> 

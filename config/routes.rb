@@ -9,4 +9,13 @@ Rails.application.routes.draw do
   get "/products/:id" => "products#show"
   delete "/products/:id" => "products#destroy"
   get "random_product" => "products#random"
+
+  get "/signup" => "users#new"
+  post "/users" => "users#create"
+  get "/login" => "sessions#new"
+  post "/login" => "sessions#create"
+  get "/logout" => "sessions#destroy"
+
+
+
 end
