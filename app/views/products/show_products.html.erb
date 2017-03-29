@@ -3,6 +3,12 @@
 <p>
   
   Name: <%= @product.name %>  
+  <h4> Categories:</h4>
+  <ul> 
+  <% @product.categories.each do |category| %>
+  <li> <%= category.name %></li>
+  <% end %>
+  </ul>
   <h5> Made By: <%= @product.supplier.name %> </h5><br>
   Price: <%= number_to_currency(@product.price) %> <br>
   Images: 
@@ -22,6 +28,15 @@
 
   <%= form_tag "/products/#{@product.id}" , method: :delete do %>
 <input type="Submit" value="Destroy product">
-<% end %>
+  <% end %>
+
+  <%= form_tag "/carted_products", method: :post do %>
+<input type="text" class="btn btn-default" name="quantity" placeholder="Add quantity">
+<input type="hidden" class="btn btn-default" name="product_id" value="<%= @product.id %>">
+<input type="Submit" class="btn btn-default" value="Add to Cart!!!">
+  <% end %>
+
+
+
   
 

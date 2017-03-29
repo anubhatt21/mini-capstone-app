@@ -7,8 +7,13 @@ class ProductsController < ApplicationController
     session[:count] += 1
     @page_count = session[:count]
     
-    if params[:discounted] == "true"
+    if params[:form_name]
+      @products = Product.where("name LIKE?", "%" + params[:form_name] + "%")
+    elsif params[:discounted] == "true"
       @products = Product.where("price < ?", 10)
+    elsif params[:category]
+      category = Category.find_by(name: params[:category])
+      @products = category.products
     else
       sort_attribute = params[:sort_by] || "name"
       sort_attribute_order = params[:sort_order] || "asc"
