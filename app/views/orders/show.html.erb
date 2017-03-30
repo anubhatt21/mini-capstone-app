@@ -1,9 +1,14 @@
 <h2> Order Successfully created!! </h2>
 <h3> Order Details: <br>
 Order ID: <%= @order.id %> <br>
-Product name: <%= @order.product.name %> <br>
-Email: <%= @order.user.email %> <br>
-Quantity: <%= @order.quantity %> <br> 
+Email: <%= @order.user.email %> </h3><br>
+
+<% @order.carted_products.each do |carted_product| %>
+  <h3>Product name: <%= carted_product.product.name %></h3>
+  <% if carted_product.product.images.first %>
+    <img src="<%= carted_product.product.images.first.url %>" alt="">
+  <% end %>  
+<% end %>
 Subtotal: <%= @order.subtotal %> <br>
 Tax: <%= @order.tax %> <br>
 Total: <%= @order.total %> <br>

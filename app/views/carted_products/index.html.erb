@@ -1,13 +1,13 @@
 <h2> Cart Information: </h2>
 <% @carted_products.each do |carted_product| %>
-<p>
-<li><ul>User ID : <%= carted_product.user_id %>
-Product ID: <%= carted_product.product_id %>
-Quantity: <%= carted_product.quantity %>
-Status: <%= carted_product.status %></ul></li>
-</p>
+<h2><%= carted_product.product.name %></h2>
+<h3>Quantity: <%= carted_product.quantity %></h3>
+<h3>User ID : <%= carted_product.user_id %></h3>
+<h3> ID: <%= carted_product.product_id %></h3>
+<h3>Status: <%= carted_product.status %></h3>
 <% end %>
 
-<% form_tag "/carted_products/#{order.id}", method: :get do %>
+<%= form_tag "/orders", method: :post do %>
   <input type="Submit" class="btn btn-default" value="Buy Now!!!">
 <% end %>
+
